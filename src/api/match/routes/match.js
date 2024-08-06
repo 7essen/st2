@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * fhd router
+ * match router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::fhd.fhd');
+module.exports = createCoreRouter('api::match.match');

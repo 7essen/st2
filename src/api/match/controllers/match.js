@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * fhd controller
+ * match controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::fhd.fhd');
+module.exports = createCoreController('api::match.match');

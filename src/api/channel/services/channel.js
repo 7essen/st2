@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * fhd service
+ * channel service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::fhd.fhd');
+module.exports = createCoreService('api::channel.channel');

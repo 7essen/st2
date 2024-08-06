@@ -362,30 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiFhdFhd extends Schema.CollectionType {
-  collectionName: 'fhds';
-  info: {
-    singularName: 'fhd';
-    pluralName: 'fhds';
-    displayName: 'fhd';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    fdh: Attribute.String;
-    cvcv: Attribute.Date;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::fhd.fhd', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::fhd.fhd', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -812,6 +788,141 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiChannelChannel extends Schema.CollectionType {
+  collectionName: 'channels';
+  info: {
+    singularName: 'channel';
+    pluralName: 'channels';
+    displayName: 'Channel';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    streamLink: Attribute.String;
+    channel_category: Attribute.Relation<
+      'api::channel.channel',
+      'manyToOne',
+      'api::channel-category.channel-category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::channel.channel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::channel.channel',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiChannelCategoryChannelCategory
+  extends Schema.CollectionType {
+  collectionName: 'channel_categories';
+  info: {
+    singularName: 'channel-category';
+    pluralName: 'channel-categories';
+    displayName: 'ChannelCategory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    channels: Attribute.Relation<
+      'api::channel-category.channel-category',
+      'oneToMany',
+      'api::channel.channel'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::channel-category.channel-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::channel-category.channel-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMatchMatch extends Schema.CollectionType {
+  collectionName: 'matches';
+  info: {
+    singularName: 'match';
+    pluralName: 'matches';
+    displayName: 'Match';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    teamA: Attribute.String;
+    teamB: Attribute.String;
+    logoA: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    logoB: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    matchTime: Attribute.Time;
+    streamLink: Attribute.String;
+    commentator: Attribute.String;
+    channel: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::match.match',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::match.match',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNewNew extends Schema.CollectionType {
+  collectionName: 'news';
+  info: {
+    singularName: 'new';
+    pluralName: 'news';
+    displayName: 'News';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    content: Attribute.Text;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    date: Attribute.DateTime;
+    link: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::new.new', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::new.new', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -822,7 +933,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::fhd.fhd': ApiFhdFhd;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -831,6 +941,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::channel.channel': ApiChannelChannel;
+      'api::channel-category.channel-category': ApiChannelCategoryChannelCategory;
+      'api::match.match': ApiMatchMatch;
+      'api::new.new': ApiNewNew;
     }
   }
 }
