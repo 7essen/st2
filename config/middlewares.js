@@ -1,12 +1,27 @@
-module.exports = [
-  'strapi::logger',
-  'strapi::errors',
-  'strapi::security',
-  'strapi::cors',
-  'strapi::poweredBy',
-  'strapi::query',
-  'strapi::body',
-  'strapi::session',
-  'strapi::favicon',
-  'strapi::public',
+export default [
+	// ...
+	{
+		name: 'strapi::security',
+		config: {
+			contentSecurityPolicy: {
+				useDefaults: true,
+				directives: {
+					'connect-src': ["'self'", 'https:'],
+					'img-src': [
+						"'self'",
+						'data:',
+						'blob:',
+						'https://st2provider.public.blob.vercel-storage.com', // تأكد من أن هذا هو العنوان الصحيح
+					],
+					'media-src': [
+						"'self'",
+						'data:',
+						'blob:',
+						'https://st2provider.public.blob.vercel-storage.com', // تأكد من أن هذا هو العنوان الصحيح
+					],
+					upgradeInsecureRequests: null,
+				},
+			},
+		},
+	},
 ];
