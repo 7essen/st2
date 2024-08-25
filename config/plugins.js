@@ -1,11 +1,15 @@
 module.exports = ({ env }) => ({
 	upload: {
 		config: {
-			provider: 'strapi-provider-upload-vercel',
+			provider: 'cloudinary',
 			providerOptions: {
-				token: 'vercel_blob_rw_k6zCgoCCJcYCW0QY_bOWHbKFb0bY7iZvBrrLumDt8lc4ujX',
-				addRandomSuffix: true,
-				cacheControlMaxAge: 31536000, // سنة بالثواني
+				cloud_name: env('CLOUDINARY_NAME'),
+				api_key: env('CLOUDINARY_KEY'),
+				api_secret: env('CLOUDINARY_SECRET'),
+			},
+			actionOptions: {
+				upload: {},
+				delete: {},
 			},
 		},
 	},
